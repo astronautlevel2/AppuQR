@@ -17,3 +17,6 @@ class QRGen:
                 if len(m.attachments) == 1: # Currently this only supports 1 attachment at most
                     img = qrcode.make(m.attachments[0].url)
                     await ctx.send(file=discord.File(img, "qr_code.png")
+
+def setup(bot):
+    bot.add_cog(QRGen(bot))
