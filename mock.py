@@ -1,4 +1,5 @@
 from discord.ext import commands
+from random import random
 
 """CoG uSeD fOr TyPiNg LiKe ThIs"""
 
@@ -12,11 +13,24 @@ class Mock:
         """`mock` text you want to mock"""
 
         msgbuf = ""
-        upper = False
+        uppercount = 0
+        lowercount = 0
         for c in message:
             if c.isalpha():
+                if uppercount == 2:
+                    uppercount = 0
+                    upper = False
+                    lowercount += 1
+                elif lowercount == 2:
+                    lowercount = 0
+                    upper = True
+                    uppercount += 1
+                else:
+                    upper = random() > 0.5
+                    uppercount = uppercount + 1 if upper else 0
+                    lowercount = lowercount + 1 if not upper else 0
+
                 msgbuf += c.upper() if upper else c.lower()
-                upper = not upper
             else:
                 msgbuf += c
         await ctx.message.edit(content=msgbuf)
