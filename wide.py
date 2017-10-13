@@ -1,4 +1,4 @@
-from discord.exit import commands
+from discord.ext import commands
 
 """Cog used to make text ＷＩＤＥ"""
 
@@ -43,14 +43,15 @@ class Wide:
             "9": "９",
             "0": "０",
             "!": "！",
-            "?": "？"
+            "?": "？",
+            " ": "　"
             }
 
     @commands.command()
     async def wide(self, ctx, *, message):
         """[p]wide <text to make wide>"""
 
-        result = msg.lower().translate(str.maketrans(substitution_dict))
+        result = message.lower().translate(str.maketrans(self.substitution_dict))
 
         await ctx.message.delete()
         await ctx.send(result)
