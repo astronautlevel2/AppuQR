@@ -29,7 +29,7 @@ class ServerMute:
         await ctx.send(self.bot.bot_prefix + "{} server".format(status))
 
     async def on_message(self, message):
-        if message.guild.id in self.mute_data:
+        if message.guild and message.guild.id in self.mute_data:
             if message.mention_everyone or self.bot.user in message.mentions or bool(set(message.guild.get_member(self.bot.user.id).roles) & set(message.role_mentions)):
                 await message.ack()
 
